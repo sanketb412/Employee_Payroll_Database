@@ -65,3 +65,22 @@ mysql> SELECT * FROM employee_payroll;
 |  3 | Fill |  30000 | 2021-08-22 |
 +----+------+--------+------------+
 3 rows in set (0.01 sec)
+
+===================# UC5: #============================
+mysql> SELECT salary FROM employee_payroll WHERE name = 'Bill';
++--------+
+| salary |
++--------+
+|  10000 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM employee_payroll
+    -> WHERE start BETWEEN CAST('2021-01-01' AS DATE) AND DATE(NOW());
++----+------+--------+------------+
+| id | name | salary | start      |
++----+------+--------+------------+
+|  1 | Bill |  10000 | 2021-01-03 |
+|  2 | Jill |  20000 | 2021-01-03 |
++----+------+--------+------------+
+2 rows in set (0.03 sec)
