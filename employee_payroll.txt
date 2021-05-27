@@ -47,3 +47,20 @@ mysql> DESCRIBE employee_payroll;
 +--------+--------------+------+-----+---------+----------------+
 4 rows in set (0.07 sec)
 
+# UC3:
+mysql> INSERT INTO employee_payroll (name, salary, start) VALUES
+    -> ('Bill',10000.00, '2021-01-03'),
+    -> ('Jill',20000.00, '2021-01-03'),
+    -> ('Fill',30000.00, '2021-08-22');
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM employee_payroll;
++----+------+--------+------------+
+| id | name | salary | start      |
++----+------+--------+------------+
+|  1 | Bill |  10000 | 2021-01-03 |
+|  2 | Jill |  20000 | 2021-01-03 |
+|  3 | Fill |  30000 | 2021-08-22 |
++----+------+--------+------------+
+3 rows in set (0.01 sec)
