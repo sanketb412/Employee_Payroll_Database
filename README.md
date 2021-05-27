@@ -4,11 +4,15 @@ echo "Welcome to Employee PayRoll Service"
 # UC1: Creating database querey
 
 mysql> CREATE DATABASE payroll_service_database;
+
 Query OK, 1 row affected (0.07 sec)
 
 mysql> show databases;
+
 +--------------------------+
+
 | Database                 |
+
 +--------------------------+
 | information_schema       |
 | mysql                    |
