@@ -211,7 +211,7 @@ mysql> SELECT gender, MAX(salary) FROM employee_payroll GROUP BY GENDER;
 +--------+-------------+
 2 rows in set (0.00 sec)
 
------------------------------# UC8: #-------------------------------------
+-----------------------------# UC8: #--------------------------------------------------------------------------------------------
 mysql> ALTER TABLE employee_payroll ADD phone_number VARCHAR(250) AFTER name;
 Query OK, 0 rows affected (2.07 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -252,3 +252,54 @@ mysql> SELECT * FROM employee_payroll;
 |  3 | Fill | NULL         | NULL    | NULL       | M      |  30000 | 2021-08-22 |
 +----+------+--------------+---------+------------+--------+--------+------------+
 3 rows in set (0.02 sec)
+
+-----------------------------# UC9: #----------------------------------------------------------------------------------------------
+mysql> ALTER TABLE employee_payroll RENAME COLUMN salary TO basic_pay;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD deductions DOUBLE NOT NULL AFTER basic_pay;
+Query OK, 0 rows affected (1.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD taxable_pay DOUBLE NOT NULL AFTER deductions;
+Query OK, 0 rows affected (0.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD tax DOUBLE NOT NULL AFTER taxable_pay;
+Query OK, 0 rows affected (1.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD net_pay DOUBLE NOT NULL AFTER tax;
+Query OK, 0 rows affected (0.79 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe employee_PAYROLL;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(150) | NO   |     | NULL    |                |
+| phone_number | varchar(250) | YES  |     | NULL    |                |
+| address      | varchar(250) | YES  |     | TBD     |                |
+| department   | varchar(250) | YES  |     | NULL    |                |
+| gender       | char(1)      | YES  |     | NULL    |                |
+| basic_pay    | double       | NO   |     | NULL    |                |
+| deductions   | double       | NO   |     | NULL    |                |
+| taxable_pay  | double       | NO   |     | NULL    |                |
+| tax          | double       | NO   |     | NULL    |                |
+| net_pay      | double       | NO   |     | NULL    |                |
+| start        | date         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+12 rows in set (0.03 sec)
+
+mysql> SELECT * FROM employee_payroll;
++----+------+--------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+| id | name | phone_number | address | department | gender | basic_pay | deductions | taxable_pay | tax | net_pay | start      |
++----+------+--------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+|  1 | Bill | NULL         | NULL    | NULL       | M      |     10000 |          0 |           0 |   0 |       0 | 2021-01-03 |
+|  2 | Jill | NULL         | NULL    | NULL       | F      |     30000 |          0 |           0 |   0 |       0 | 2021-01-03 |
+|  3 | Fill | NULL         | NULL    | NULL       | M      |     30000 |          0 |           0 |   0 |       0 | 2021-08-22 |
++----+------+--------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+3 rows in set (0.00 sec)
+
